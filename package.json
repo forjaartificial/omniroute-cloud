@@ -1,0 +1,16 @@
+{
+  "name": "omniroute-cloud",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "OmniRoute Universal AI Gateway 24/7 on Render",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "omniroute": "latest"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
