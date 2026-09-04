@@ -12,20 +12,24 @@ process.env.OMNIROUTE_SERVER_HOST = host;
 
 console.log(`[OmniRoute Cloud] Starting server on ${host}:${port}...`);
 
-const binPath = path.join(__dirname, 'node_modules', 'omniroute', 'bin', 'omniroute.mjs');
+const distDir = path.join(__dirname, 'node_modules', 'omniroute', 'dist');
+const serverWs = path.join(distDir, 'server-ws.mjs');
+
 const child = spawn(
   process.execPath,
-  ['--max-old-space-size=384', binPath, 'serve', '--port', String(port), '--no-open'],
+  ['--max-old-space-size=384', serverWs],
   {
+    cwd: distDir,
     stdio: 'inherit',
     env: {
       ...process.env,
       PORT: String(port),
-      OMNIROUTE_PORT: String(port),
       DASHBOARD_PORT: String(port),
       API_PORT: String(port),
-      OMNIROUTE_SERVER_HOST: host,
+      OMNIROUTE_PORT: String(port),
       HOSTNAME: host,
+      OMNIROUTE_SERVER_HOST: host,
+      NODE_ENV: 'production',
       NODE_OPTIONS: '--max-old-space-size=384'
     }
   }
