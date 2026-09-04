@@ -13,13 +13,14 @@ process.env.OMNIROUTE_SERVER_HOST = host;
 console.log(`[OmniRoute Cloud] Starting server on ${host}:${port}...`);
 
 const binPath = path.join(__dirname, 'node_modules', 'omniroute', 'bin', 'omniroute.mjs');
-const child = spawn(process.execPath, [binPath], {
+const child = spawn(process.execPath, ['--max-old-space-size=384', binPath], {
   stdio: 'inherit',
   env: {
     ...process.env,
     PORT: port,
     OMNIROUTE_PORT: port,
-    OMNIROUTE_SERVER_HOST: host
+    OMNIROUTE_SERVER_HOST: host,
+    NODE_OPTIONS: '--max-old-space-size=384'
   }
 });
 
@@ -27,3 +28,4 @@ child.on('exit', (code) => {
   console.log(`[OmniRoute Cloud] Exited with code ${code}`);
   process.exit(code || 0);
 });
+

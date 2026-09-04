@@ -5,8 +5,9 @@
   "description": "OmniRoute Universal AI Gateway 24/7 on Render",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --max-old-space-size=384 server.js"
   },
+
   "dependencies": {
     "omniroute": "latest"
   },
